@@ -1,0 +1,316 @@
+# Write Up exercise XSS_CSRF 
+
+## Lab: Reflected XSS into HTML context with nothing encoded
+
+![image](https://gist.github.com/assets/91708209/98b900ce-25da-4795-ab1d-9a5c638bd325)
+
+Đầu tiên khi vào website ta sẽ thấy 1 ô search box 
+
+![image](https://gist.github.com/assets/91708209/322d9acd-2851-428e-a38d-7f878a39ffea)
+
+Ta sẽ thử sử dụng và thấy rằng khi search bất cứ từ khóa gì thì sẽ được gán vào parameter ```search```
+
+![image](https://gist.github.com/assets/91708209/ef3ce968-09e9-41dd-b0d8-a065f146c580)
+
+Ta sẽ thử dùng lệnh alert ở đây
+
+![image](https://gist.github.com/assets/91708209/78e92423-5147-485f-87fc-00fc91c195cf)
+
+
+![image](https://gist.github.com/assets/91708209/e47f9631-c513-4a17-932e-425ca047db47)
+
+
+## Lab: Stored XSS into HTML context with nothing encoded
+
+![image](https://gist.github.com/assets/91708209/e60054b5-e82e-43ff-a913-16dd4614da42)
+
+Ở lab này ta sẽ không còn search box mà thay vào đó là chức năng view post
+
+![image](https://gist.github.com/assets/91708209/e1380d28-97af-4154-9302-a87d55180520)
+
+Ta thấy parameter postId, thử inject vào đây 
+![image](https://gist.github.com/assets/91708209/7ce09952-598a-4674-bb00-839a20eff66f)
+
+Kết quả là không được ta tiếp tục tìm kiếm nơi để inject code
+![image](https://gist.github.com/assets/91708209/ae59e30f-06ab-499f-a85e-31a9203c7919)
+
+Ở bên dưới của post ta thấy chỗ để comment ta sẽ thử inject vào trường đầu tiên xem thế nào
+
+![image](https://gist.github.com/assets/91708209/72f7f2a9-c57f-4e50-bb28-031d601a901c)
+
+Sau khi post comment ta sẽ được đưa đến trang này
+
+![image](https://gist.github.com/assets/91708209/6593b50b-edfd-4218-a4d9-e1e938cd272f)
+
+Vì đây là Store XSS nên ta thử quay lại trang comment xem như nào
+
+![image](https://gist.github.com/assets/91708209/70ee54af-e4ae-4a3a-82e6-8d0d28880bb3)
+
+=> Mỗi lần load lại trang có postId=9 sẽ bị alert
+
+## Lab: DOM XSS in ```document.write``` sink using source ```location.search```
+
+![image](https://gist.github.com/assets/91708209/e8d2f7af-f8aa-4a25-81cd-03e5185f8586)
+
+Ở lab này vẫn có search box ta thử inject code vào đây và challenge này có liên quan đến DOM nên ta sẽ xem qua code
+
+![image](https://gist.github.com/assets/91708209/894c21d0-aaf3-4fd0-bb0b-254ac1acbbe5)
+
+![image](https://gist.github.com/assets/91708209/7004229f-ed75-40c5-9e04-49bc4995ae92)
+
+Sau khi xem qua thì ta thấy được code được inject ở 2 nơi tuy nhiên không gây ra bất cứ tác động gì
+
+Giả sử ta search 1 thì img tag sẽ như này ```<img src="/resources/images/tracker.gif?searchTerms=1">```
+
+Bây giờ ta sẽ cố gắng escape ra khỏi attribute src của tag img, bằng cách thêm dấu ```"```: ```<img src="/resources/images/tracker.gif?searchTerms=">```
+
+Sau đó ta sẽ inject code vào, thường thì ta sẽ thêm event ```onerror``` nhưng ở đây ta không load ra bất cứ ảnh gì nếu search sai<br> 
+=> dùng một event khác của tag img<br>
+
+![image](https://gist.github.com/assets/91708209/9c11c375-9aac-44f1-9a22-8eb72d586f21)
+
+Ở đây ta thấy event ```onload``` là phù hợp nhất:```<img src="/resources/images/tracker.gif?searchTerms=" onload="alert(1)>"```<br>
+
+Do còn dư 1 dấu ```"``` của tag img khi ta cố escape nên payload của ta sẽ trở thành: ```" onload="alert(1)``` <br>
+
+![image](https://gist.github.com/assets/91708209/b86d75d3-ffa9-40a4-ac5c-c1fef76127dd)
+
+![image](https://gist.github.com/assets/91708209/51adc3fe-1085-4883-9c76-a17a0ab579c2)
+
+![image](https://gist.github.com/assets/91708209/df923a4d-7452-4516-8ff3-94f162c22a0c)
+
+
+
+Reference:
+```text
+https://www.html.am/tags/html-img-tag.cfm
+```
+
+
+## Lab: DOM XSS in ```innerHTML``` sink using source ```location.search```
+
+
+![image](https://gist.github.com/assets/91708209/d9623e8c-1009-4fdb-ac11-479fe59e1a2c)
+
+Challenge này khá giống với challenge trước, mình đã thử inject tag script ```<script>alert(1)</script>``` vào search box, tuy nhiên code không chạy
+
+![image](https://gist.github.com/assets/91708209/7c601925-4d65-4d52-865d-fb054b925303)
+
+Bởi vì tag ```span``` thì có khá tương đồng với ```div``` mặc dù có một số khác biệt, tức là nó có thể thực thi một số tag bên trong nó
+
+Vì vậy mình sẽ thử dùng tag img ```<img src=x onerror=alert(1)>```
+
+![image](https://gist.github.com/assets/91708209/cafa0f3f-c1d9-4a18-873c-21b0e1f83dd0)
+
+
+## Lab: DOM XSS in jQuery anchor ```href``` attribute sink using ```location.search``` source
+
+
+![image](https://gist.github.com/assets/91708209/f02e601c-717b-4f19-8f05-685c65228e29)
+
+Trong challenge này đề bài yêu cầu ta chú ý vào ```href``` khi vào lab thì ta thấy có chức năng submit feedback
+
+![image](https://gist.github.com/assets/91708209/8e1e1ae8-50cc-4762-bbed-166da6c98a7d)
+
+Mình đã thử tìm kiếm tag ```href``` trong web này chỉ duy nhất ở vị trí này là có thể thay đổi tùy ý được
+
+![image](https://gist.github.com/assets/91708209/c4747b8e-a04f-499c-8e12-d822cb82ada3)
+
+Sau đó mình đã tìm cách để chạy javascript trong tag ```href```
+
+![image](https://gist.github.com/assets/91708209/7f53cd7c-6b00-4ee5-adbb-8e292bccb16c)
+
+Và thử 
+
+![image](https://gist.github.com/assets/91708209/d1c0e2d4-eff4-4a92-8574-560a6499a037)
+
+
+
+Reference:
+```text
+https://flaviocopes.com/links-for-javascript/
+
+
+## 
+```
+
+## Lab: DOM XSS in jQuery selector sink using a hashchange event
+
+![image](https://gist.github.com/assets/91708209/06d62b48-6cd1-4d45-8bce-661db17987ed)
+
+Lỗi của bài này nằm ở hashchange event trong jquery nên ta sẽ tìm đoạn code có chứa event này
+
+![image](https://gist.github.com/assets/91708209/f44e84d9-de44-48f2-b3e9-67ee38780711)
+
+Đoạn code này có tác dụng
+
+```javascript
+
+$(window).on('hashchange', function(){
+    var post = $('section.blog-list h2:contains(' + decodeURIComponent(window.location.hash.slice(1)) + ')');
+    if (post) post.get(0).scrollIntoView();
+});
+                    
+```
+
+Khi sự kiện hashchange được kích hoạt sẽ tìm kiếm phần tử ```<h2>``` nằm trong phần ```<section>``` với class CSS là ```'blog-list'```, và có nội dung chứa chuỗi giá trị sau khi giải mã từ phần đoạn hash trong URL.<br>
+
+Sau khi tìm thấy nó sẽ kiểm tra điều kiện sau đó dùng chức năng auto scroll của hàm scrollIntoView<br>
+
+Tuy nhiên lỗi xảy ra ở if bởi vì trong jquery, một đối tượng trả về không bao giờ sai ở dạng boolean</br>
+
+Nói cho dễ hiểu là sau dấu # là tên của một post nào đó thì nó sẽ auto chạy tới post đó<br>
+
+![image](https://gist.github.com/assets/91708209/ede79bd9-5810-4271-8b0c-67c32888bd98)
+
+Vì vậy mình sẽ thử inject code đơn giản
+
+![image](https://gist.github.com/assets/91708209/040302c0-da73-4ad6-8f44-80fd10a7caf9)
+
+Điều này chứng minh bất cứ thứ gì được inject sau dâu ```#``` sẽ được thực thi, nhưng nếu ta muốn thực hiện ```zero-click``` <br>
+
+thì ta sẽ phải ép web chạy script bằng cách dùng ```iframe```, gửi một request có body là ```iframe``` đến web và gán giá trị ép web phải load
+
+![image](https://gist.github.com/assets/91708209/5cac2958-5047-4fe7-8a7a-294e699501e8)
+
+Ở payload này ta sẽ lấy trang web bị lỗi cộng chuỗi với tag img kèm với lệnh print vì vậy payload sẽ giống như lúc nãy ta thử inject ở trên
+
+![image](https://gist.github.com/assets/91708209/66cb50ce-8d34-440c-8339-3c6675454b93)
+
+
+## Lab: Reflected XSS into attribute with angle brackets HTML-encoded
+
+![image](https://gist.github.com/assets/91708209/952b4ab9-681b-4758-963b-7cee6d5cb17f)
+
+Ở challenge này ta nhận ra bất cứ gì ta type vào search box cx đều sẽ đưa vào tag ```input```
+
+
+```html
+<input type="text" placeholder="Search the blog..." name="search" value="hello">
+```
+Thêm đó ta biết được rằng tag ```input``` cũng có các event như ```img```<br>
+
+Vì vậy payload của ta sẽ như sau: ```"onmouseover="alert(1)```<br>
+Lúc này tag input sẽ trở thành: ```<input type="text" placeholder="Search the blog..." name="search" value=""onmouseover="alert(1)">```
+
+![image](https://gist.github.com/assets/91708209/70d18daa-9b59-4d91-a59b-3aa48e66a280)
+
+reference:
+```text
+https://www.html.am/tags/html-input-tag.cfm
+```
+
+## Lab: Stored XSS into anchor href attribute with double quotes HTML-encoded
+
+![image](https://gist.github.com/assets/91708209/02f1dcc1-aecf-48b0-819a-f1c2b0944e72)
+
+Web này có chức năng comment vậy ta sẽ xem thử chức năng này hoạt động thế nào
+
+![image](https://gist.github.com/assets/91708209/75e2c169-60b3-4f2b-a4e7-df09c20d6d5b)
+
+Sau đó ta nhận ra là chức năng comment của lưu website của comment trong tag ```a```, vì vậy khi ấn vào sẽ được thực thi</br>
+
+Ta còn biết thêm nêu muốn thực thi javascript trong attribute ```href```: ```javascript:alert(1)```
+
+![image](https://gist.github.com/assets/91708209/8b47bdf1-9f75-4ffd-b23a-8cabd875515c)
+
+![image](https://gist.github.com/assets/91708209/57dd17c6-877d-462b-b99b-4e71e885e923)
+
+![image](https://gist.github.com/assets/91708209/47b48c6c-e904-4358-a138-ff7d5d5863b0)
+
+
+## Lab: Reflected XSS into a JavaScript string with angle brackets HTML encoded
+
+![image](https://gist.github.com/assets/91708209/1693ae58-2fdd-420b-a0ba-b5c1e9119b93)
+
+Challenge này bất cứ từ gì có chữ ```script``` đều bị encode
+
+![image](https://gist.github.com/assets/91708209/792d7194-b2da-4ced-a5c2-b87457df9e97)
+
+Giả sử ta search 1 input bình thường, ta thấy rằng input là một biến trong đoạn code javascript
+
+![image](https://gist.github.com/assets/91708209/f9b177b1-4142-4632-b05e-7c5ead151554)
+
+```javascript
+
+var searchTerms = 'test';
+document.write('<img src="/resources/images/tracker.gif?searchTerms='+encodeURIComponent(searchTerms)+'">');
+                    
+```
+
+Ta sẽ escape ra khỏi biến và thực thi thẳng code javascript chứ không cần tag script nữa<br>
+Payload lúc này sẽ như sau: ```';alert(1);//```
+
+![image](https://gist.github.com/assets/91708209/a765e7f7-d5d2-4a2c-ab0f-15c267d148b6)
+
+![image](https://gist.github.com/assets/91708209/29a59ced-4bdc-4c5b-ab78-7935b24b2769)
+
+
+## Lab: CSRF vulnerability with no defenses
+
+![image](https://gist.github.com/assets/91708209/65055af6-4240-4123-844a-07cd6c8b754d)
+
+Trong challenge này mục tiêu là ép người dùng thực hiện hành động không mong muốn<br>
+và trong challenge này thì trong web có 1 hành động là update email
+
+![image](https://gist.github.com/assets/91708209/fb2bf459-ded5-42ff-831d-7eda5cab6333)
+
+Đây là form email lấy được từ source code
+```html
+<form class="login-form" name="change-email-form" action="/my-account/change-email" method="POST">
+    <label>Email</label>
+    <input required="" type="email" name="email" value="">
+    <button class="button" type="submit"> Update email </button>
+</form>
+```
+
+Ta sẽ chỉnh sửa một chút để có thể gửi request tới website:<br> 
+- Sửa action không còn là đường dẫn mà là URL đến chức năng update email
+- Sửa form submit 
+
+Sửa code html này để khi gửi dùng ấn vào chức năng sửa email không phải form của web thật hiện ra mà là form của attacker
+
+```html
+<html>
+  <body>
+    <form action="https://0a5f00de04b921f4826ac5ca0051000c.web-security-academy.net/my-account/change-email" method="POST">
+      <input type="hidden" name="email" value="changed&#64;changed&#46;com" />
+      <input type="submit" value="Submit request" />
+    </form>
+    <script>document.forms[0].submit();</script>
+  </body>
+</html>
+```
+
+![image](https://gist.github.com/assets/91708209/be21b6d8-6b51-4ebd-9c81-b780b5687d05)
+
+Sau khi dùng exploit server để gửi thì bây giờ email của người dùng đã được đổi thành email ta muốn
+
+![image](https://gist.github.com/assets/91708209/8072e5a2-055b-48b3-9668-9255782ca561)
+
+
+### Account sau khi giải bài tập
+
+![image](https://gist.github.com/assets/91708209/6570f1c3-7d38-4cb7-9836-8c019c5cba12)
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
