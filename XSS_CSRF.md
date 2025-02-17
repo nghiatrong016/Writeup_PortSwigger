@@ -54,9 +54,9 @@ Vì đây là Store XSS nên ta thử quay lại trang comment xem như nào
 
 Ở lab này vẫn có search box ta thử inject code vào đây và challenge này có liên quan đến DOM nên ta sẽ xem qua code
 
-![image](https://gist.github.com/assets/91708209/894c21d0-aaf3-4fd0-bb0b-254ac1acbbe5)
+![image](https://github.com/user-attachments/assets/e7f0f065-0ca1-4d2c-9073-28af6bf35a00)
 
-![image](https://gist.github.com/assets/91708209/7004229f-ed75-40c5-9e04-49bc4995ae92)
+![image](https://github.com/user-attachments/assets/53333244-7da1-4126-a7a0-c5935ccbcb14)
 
 Sau khi xem qua thì ta thấy được code được inject ở 2 nơi tuy nhiên không gây ra bất cứ tác động gì
 
@@ -67,18 +67,17 @@ Bây giờ ta sẽ cố gắng escape ra khỏi attribute src của tag img, b�
 Sau đó ta sẽ inject code vào, thường thì ta sẽ thêm event ```onerror``` nhưng ở đây ta không load ra bất cứ ảnh gì nếu search sai<br> 
 => dùng một event khác của tag img<br>
 
-![image](https://gist.github.com/assets/91708209/9c11c375-9aac-44f1-9a22-8eb72d586f21)
+![image](https://github.com/user-attachments/assets/c023e507-d078-4c6a-9a86-5d039f4067ef)
 
 Ở đây ta thấy event ```onload``` là phù hợp nhất:```<img src="/resources/images/tracker.gif?searchTerms=" onload="alert(1)>"```<br>
 
 Do còn dư 1 dấu ```"``` của tag img khi ta cố escape nên payload của ta sẽ trở thành: ```" onload="alert(1)``` <br>
 
-![image](https://gist.github.com/assets/91708209/b86d75d3-ffa9-40a4-ac5c-c1fef76127dd)
+![image](https://github.com/user-attachments/assets/5009cc24-1ba3-4865-852a-e7a1380f23ce)
 
-![image](https://gist.github.com/assets/91708209/51adc3fe-1085-4883-9c76-a17a0ab579c2)
+![image](https://github.com/user-attachments/assets/88131e12-5162-42ad-8e48-f12375b081cc)
 
-![image](https://gist.github.com/assets/91708209/df923a4d-7452-4516-8ff3-94f162c22a0c)
-
+![image](https://github.com/user-attachments/assets/87741055-822d-43c0-9561-e6b446e33c93)
 
 
 Reference:
@@ -90,35 +89,34 @@ https://www.html.am/tags/html-img-tag.cfm
 ## Lab: DOM XSS in ```innerHTML``` sink using source ```location.search```
 
 
-![image](https://gist.github.com/assets/91708209/d9623e8c-1009-4fdb-ac11-479fe59e1a2c)
+![image](https://github.com/user-attachments/assets/d5871558-b4af-4d71-8260-297fcfcafd0d)
 
 Challenge này khá giống với challenge trước, mình đã thử inject tag script ```<script>alert(1)</script>``` vào search box, tuy nhiên code không chạy
 
-![image](https://gist.github.com/assets/91708209/7c601925-4d65-4d52-865d-fb054b925303)
+![image](https://github.com/user-attachments/assets/09729118-a4f2-4368-8ccd-395e2c9d1b2b)
 
 Bởi vì tag ```span``` thì có khá tương đồng với ```div``` mặc dù có một số khác biệt, tức là nó có thể thực thi một số tag bên trong nó
 
 Vì vậy mình sẽ thử dùng tag img ```<img src=x onerror=alert(1)>```
 
-![image](https://gist.github.com/assets/91708209/cafa0f3f-c1d9-4a18-873c-21b0e1f83dd0)
-
+![image](https://github.com/user-attachments/assets/17ce9bed-319d-41eb-8cca-33cb1e9c1343)
 
 ## Lab: DOM XSS in jQuery anchor ```href``` attribute sink using ```location.search``` source
 
 
-![image](https://gist.github.com/assets/91708209/f02e601c-717b-4f19-8f05-685c65228e29)
+![image](https://github.com/user-attachments/assets/4ace5cb0-cee5-43cc-acc4-838b21d15a0f)
 
 Trong challenge này đề bài yêu cầu ta chú ý vào ```href``` khi vào lab thì ta thấy có chức năng submit feedback
 
-![image](https://gist.github.com/assets/91708209/8e1e1ae8-50cc-4762-bbed-166da6c98a7d)
+![image](https://github.com/user-attachments/assets/141c74af-e515-4026-a5df-ce281427f26e)
 
 Mình đã thử tìm kiếm tag ```href``` trong web này chỉ duy nhất ở vị trí này là có thể thay đổi tùy ý được
 
-![image](https://gist.github.com/assets/91708209/c4747b8e-a04f-499c-8e12-d822cb82ada3)
+![image](https://github.com/user-attachments/assets/9b5fad7e-5acb-4dc6-b4ec-e7d30e37a965)
 
 Sau đó mình đã tìm cách để chạy javascript trong tag ```href```
 
-![image](https://gist.github.com/assets/91708209/7f53cd7c-6b00-4ee5-adbb-8e292bccb16c)
+![image](https://github.com/user-attachments/assets/183bf26f-3d15-49ed-93da-13791a0c9922)
 
 Và thử 
 
