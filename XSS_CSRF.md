@@ -120,7 +120,7 @@ Sau đó mình đã tìm cách để chạy javascript trong tag ```href```
 
 Và thử 
 
-![image](https://gist.github.com/assets/91708209/d1c0e2d4-eff4-4a92-8574-560a6499a037)
+![image](https://github.com/user-attachments/assets/ecabfd41-0210-4384-8421-4ed96b6056d6)
 
 
 
@@ -134,11 +134,11 @@ https://flaviocopes.com/links-for-javascript/
 
 ## Lab: DOM XSS in jQuery selector sink using a hashchange event
 
-![image](https://gist.github.com/assets/91708209/06d62b48-6cd1-4d45-8bce-661db17987ed)
+![image](https://github.com/user-attachments/assets/f110de62-0db5-4bd8-b61e-99ddb0af7dfd)
 
 Lỗi của bài này nằm ở hashchange event trong jquery nên ta sẽ tìm đoạn code có chứa event này
 
-![image](https://gist.github.com/assets/91708209/f44e84d9-de44-48f2-b3e9-67ee38780711)
+![image](https://github.com/user-attachments/assets/39888c19-3359-46db-b072-b4f75c44b523)
 
 Đoạn code này có tác dụng
 
@@ -159,26 +159,26 @@ Tuy nhiên lỗi xảy ra ở if bởi vì trong jquery, một đối tượng t
 
 Nói cho dễ hiểu là sau dấu # là tên của một post nào đó thì nó sẽ auto chạy tới post đó<br>
 
-![image](https://gist.github.com/assets/91708209/ede79bd9-5810-4271-8b0c-67c32888bd98)
+![image](https://github.com/user-attachments/assets/a39c0274-a170-42c4-99bf-65735543efcf)
 
 Vì vậy mình sẽ thử inject code đơn giản
 
-![image](https://gist.github.com/assets/91708209/040302c0-da73-4ad6-8f44-80fd10a7caf9)
+![image](https://github.com/user-attachments/assets/5c070ee5-cd97-49fc-bd26-7bb69cc29185)
 
 Điều này chứng minh bất cứ thứ gì được inject sau dâu ```#``` sẽ được thực thi, nhưng nếu ta muốn thực hiện ```zero-click``` <br>
 
 thì ta sẽ phải ép web chạy script bằng cách dùng ```iframe```, gửi một request có body là ```iframe``` đến web và gán giá trị ép web phải load
 
-![image](https://gist.github.com/assets/91708209/5cac2958-5047-4fe7-8a7a-294e699501e8)
+![image](https://github.com/user-attachments/assets/3d3533f6-bf40-4368-958e-5b1c8cbabc25)
 
 Ở payload này ta sẽ lấy trang web bị lỗi cộng chuỗi với tag img kèm với lệnh print vì vậy payload sẽ giống như lúc nãy ta thử inject ở trên
 
-![image](https://gist.github.com/assets/91708209/66cb50ce-8d34-440c-8339-3c6675454b93)
+![image](https://github.com/user-attachments/assets/e250bd55-4ff4-4e92-96e6-eea846f5961d)
 
 
 ## Lab: Reflected XSS into attribute with angle brackets HTML-encoded
 
-![image](https://gist.github.com/assets/91708209/952b4ab9-681b-4758-963b-7cee6d5cb17f)
+![image](https://github.com/user-attachments/assets/bc8099e9-5233-491e-8fa3-e35e0cc38489)
 
 Ở challenge này ta nhận ra bất cứ gì ta type vào search box cx đều sẽ đưa vào tag ```input```
 
@@ -191,7 +191,7 @@ Thêm đó ta biết được rằng tag ```input``` cũng có các event như `
 Vì vậy payload của ta sẽ như sau: ```"onmouseover="alert(1)```<br>
 Lúc này tag input sẽ trở thành: ```<input type="text" placeholder="Search the blog..." name="search" value=""onmouseover="alert(1)">```
 
-![image](https://gist.github.com/assets/91708209/70d18daa-9b59-4d91-a59b-3aa48e66a280)
+![image](https://github.com/user-attachments/assets/1b4ba3da-c53a-45f7-bf15-0767543ebfcb)
 
 reference:
 ```text
@@ -200,34 +200,33 @@ https://www.html.am/tags/html-input-tag.cfm
 
 ## Lab: Stored XSS into anchor href attribute with double quotes HTML-encoded
 
-![image](https://gist.github.com/assets/91708209/02f1dcc1-aecf-48b0-819a-f1c2b0944e72)
+![image](https://github.com/user-attachments/assets/43cbe101-70f5-40b6-9f42-db253bcda554)
 
 Web này có chức năng comment vậy ta sẽ xem thử chức năng này hoạt động thế nào
 
-![image](https://gist.github.com/assets/91708209/75e2c169-60b3-4f2b-a4e7-df09c20d6d5b)
+![image](https://github.com/user-attachments/assets/634ea985-a19f-4121-a26e-c7c85fdda58c)
 
 Sau đó ta nhận ra là chức năng comment của lưu website của comment trong tag ```a```, vì vậy khi ấn vào sẽ được thực thi</br>
 
 Ta còn biết thêm nêu muốn thực thi javascript trong attribute ```href```: ```javascript:alert(1)```
 
-![image](https://gist.github.com/assets/91708209/8b47bdf1-9f75-4ffd-b23a-8cabd875515c)
+![image](https://github.com/user-attachments/assets/071e4e31-29e8-429c-95bc-98a6c6d4d5f0)
 
-![image](https://gist.github.com/assets/91708209/57dd17c6-877d-462b-b99b-4e71e885e923)
+![image](https://github.com/user-attachments/assets/8c420099-9548-49dc-89db-6bffc5a1130b)
 
-![image](https://gist.github.com/assets/91708209/47b48c6c-e904-4358-a138-ff7d5d5863b0)
-
+![image](https://github.com/user-attachments/assets/fdc82a5c-3c3b-4d1b-84ba-ec7734a459e9)
 
 ## Lab: Reflected XSS into a JavaScript string with angle brackets HTML encoded
 
-![image](https://gist.github.com/assets/91708209/1693ae58-2fdd-420b-a0ba-b5c1e9119b93)
+![image](https://github.com/user-attachments/assets/b9fa2d3f-5c8b-4b90-b4c8-31f7801ccbd9)
 
 Challenge này bất cứ từ gì có chữ ```script``` đều bị encode
 
-![image](https://gist.github.com/assets/91708209/792d7194-b2da-4ced-a5c2-b87457df9e97)
+![image](https://github.com/user-attachments/assets/6cc3f700-4bda-41ec-9056-83fb1b713846)
 
 Giả sử ta search 1 input bình thường, ta thấy rằng input là một biến trong đoạn code javascript
 
-![image](https://gist.github.com/assets/91708209/f9b177b1-4142-4632-b05e-7c5ead151554)
+![image](https://github.com/user-attachments/assets/d82afdf0-e550-4b4a-b3e2-c9cb0c9a6142)
 
 ```javascript
 
@@ -239,19 +238,19 @@ document.write('<img src="/resources/images/tracker.gif?searchTerms='+encodeURIC
 Ta sẽ escape ra khỏi biến và thực thi thẳng code javascript chứ không cần tag script nữa<br>
 Payload lúc này sẽ như sau: ```';alert(1);//```
 
-![image](https://gist.github.com/assets/91708209/a765e7f7-d5d2-4a2c-ab0f-15c267d148b6)
+![image](https://github.com/user-attachments/assets/104aab79-66d4-4d0a-9b66-1a067c256d63)
 
-![image](https://gist.github.com/assets/91708209/29a59ced-4bdc-4c5b-ab78-7935b24b2769)
+![image](https://github.com/user-attachments/assets/1c1945a3-50db-4cb8-9d08-ea9c18681612)
 
 
 ## Lab: CSRF vulnerability with no defenses
 
-![image](https://gist.github.com/assets/91708209/65055af6-4240-4123-844a-07cd6c8b754d)
+![image](https://github.com/user-attachments/assets/857f3038-550c-485b-96bf-c14282de67d0)
 
 Trong challenge này mục tiêu là ép người dùng thực hiện hành động không mong muốn<br>
 và trong challenge này thì trong web có 1 hành động là update email
 
-![image](https://gist.github.com/assets/91708209/fb2bf459-ded5-42ff-831d-7eda5cab6333)
+![image](https://github.com/user-attachments/assets/27e0a920-f24f-4123-917a-041f64655c88)
 
 Đây là form email lấy được từ source code
 ```html
@@ -280,16 +279,13 @@ Sửa code html này để khi gửi dùng ấn vào chức năng sửa email kh
 </html>
 ```
 
-![image](https://gist.github.com/assets/91708209/be21b6d8-6b51-4ebd-9c81-b780b5687d05)
+![image](https://github.com/user-attachments/assets/8cc76171-2f87-45f7-a351-b8d269ed814a)
 
 Sau khi dùng exploit server để gửi thì bây giờ email của người dùng đã được đổi thành email ta muốn
 
-![image](https://gist.github.com/assets/91708209/8072e5a2-055b-48b3-9668-9255782ca561)
+![image](https://github.com/user-attachments/assets/1c3424e8-5234-4d74-824d-488711c2660b)
 
 
-### Account sau khi giải bài tập
-
-![image](https://gist.github.com/assets/91708209/6570f1c3-7d38-4cb7-9836-8c019c5cba12)
 
 
 
