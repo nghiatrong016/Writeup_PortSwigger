@@ -17,8 +17,7 @@ Ta sẽ thử dùng lệnh alert ở đây
 ![Image](https://github.com/user-attachments/assets/66831f92-f45f-4159-83c6-7444fdfcf3fb)
 
 
-![image](https://gist.github.com/assets/91708209/e47f9631-c513-4a17-932e-425ca047db47)
-
+![image](https://github.com/user-attachments/assets/e655f90d-5fc5-438f-bb4e-0bf2b7f7f343)
 
 ## Lab: Stored XSS into HTML context with nothing encoded
 
