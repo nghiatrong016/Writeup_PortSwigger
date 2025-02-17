@@ -1,5 +1,5 @@
 ## Lab: SQL injection vulnerability in WHERE clause allowing retrieval of hidden data
-![image](https://gist.github.com/user-attachments/assets/4413b6a4-94cd-41d2-8254-0c662c15ab62)
+![Image](https://github.com/user-attachments/assets/9890f783-0e29-4a33-98af-dd3cbb9e49bb)
 
 Yêu cầu của lab là thực hiện sqli để hiện ra sản phẩm bị ẩn với câu query:<br>
 
