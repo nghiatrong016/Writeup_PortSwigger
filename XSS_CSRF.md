@@ -1,4 +1,4 @@
-![image](https://github.com/user-attachments/assets/56d66bce-02c9-4308-9c99-ad637ecf2f08)# Write Up exercise XSS_CSRF 
+# Write Up exercise XSS_CSRF 
 
 ## Lab: Reflected XSS into HTML context with nothing encoded
 
