@@ -1,20 +1,20 @@
-# Write Up exercise XSS_CSRF 
+![image](https://github.com/user-attachments/assets/56d66bce-02c9-4308-9c99-ad637ecf2f08)# Write Up exercise XSS_CSRF 
 
 ## Lab: Reflected XSS into HTML context with nothing encoded
 
-![image](https://gist.github.com/assets/91708209/98b900ce-25da-4795-ab1d-9a5c638bd325)
+![Image](https://github.com/user-attachments/assets/517fee09-f1f8-4a69-ac20-2bacc36418fe)
 
 Đầu tiên khi vào website ta sẽ thấy 1 ô search box 
 
-![image](https://gist.github.com/assets/91708209/322d9acd-2851-428e-a38d-7f878a39ffea)
+![Image](https://github.com/user-attachments/assets/f95930ac-50fd-4d74-9740-30654740ba3f)
 
 Ta sẽ thử sử dụng và thấy rằng khi search bất cứ từ khóa gì thì sẽ được gán vào parameter ```search```
 
-![image](https://gist.github.com/assets/91708209/ef3ce968-09e9-41dd-b0d8-a065f146c580)
+![Image](https://github.com/user-attachments/assets/a319447b-4260-450d-ac47-a3949512b9b9)
 
 Ta sẽ thử dùng lệnh alert ở đây
 
-![image](https://gist.github.com/assets/91708209/78e92423-5147-485f-87fc-00fc91c195cf)
+![Image](https://github.com/user-attachments/assets/66831f92-f45f-4159-83c6-7444fdfcf3fb)
 
 
 ![image](https://gist.github.com/assets/91708209/e47f9631-c513-4a17-932e-425ca047db47)
@@ -22,35 +22,35 @@ Ta sẽ thử dùng lệnh alert ở đây
 
 ## Lab: Stored XSS into HTML context with nothing encoded
 
-![image](https://gist.github.com/assets/91708209/e60054b5-e82e-43ff-a913-16dd4614da42)
+![Image](https://github.com/user-attachments/assets/d1f6e4de-1486-437a-a2d9-d810644acbc0)
 
 Ở lab này ta sẽ không còn search box mà thay vào đó là chức năng view post
 
-![image](https://gist.github.com/assets/91708209/e1380d28-97af-4154-9302-a87d55180520)
+![Image](https://github.com/user-attachments/assets/a31b7827-a5a6-4341-9c1f-11432b07cde2)
 
 Ta thấy parameter postId, thử inject vào đây 
-![image](https://gist.github.com/assets/91708209/7ce09952-598a-4674-bb00-839a20eff66f)
+![Image](https://github.com/user-attachments/assets/cf2fe8bb-32aa-43e8-a01d-4522180848f5)
 
 Kết quả là không được ta tiếp tục tìm kiếm nơi để inject code
-![image](https://gist.github.com/assets/91708209/ae59e30f-06ab-499f-a85e-31a9203c7919)
+![Image](https://github.com/user-attachments/assets/57bf9a90-9735-45bd-b8e8-1c0be029cade)
 
 Ở bên dưới của post ta thấy chỗ để comment ta sẽ thử inject vào trường đầu tiên xem thế nào
 
-![image](https://gist.github.com/assets/91708209/72f7f2a9-c57f-4e50-bb28-031d601a901c)
+![Image](https://github.com/user-attachments/assets/f1292234-62f2-46a5-b926-8960ba601d9d)
 
 Sau khi post comment ta sẽ được đưa đến trang này
 
-![image](https://gist.github.com/assets/91708209/6593b50b-edfd-4218-a4d9-e1e938cd272f)
+![Image](https://github.com/user-attachments/assets/3fd7e3e5-1f73-4854-a82f-c2131e0d7d99)
 
 Vì đây là Store XSS nên ta thử quay lại trang comment xem như nào
 
-![image](https://gist.github.com/assets/91708209/70ee54af-e4ae-4a3a-82e6-8d0d28880bb3)
+![Image](https://github.com/user-attachments/assets/3fd7e3e5-1f73-4854-a82f-c2131e0d7d99)
 
 => Mỗi lần load lại trang có postId=9 sẽ bị alert
 
 ## Lab: DOM XSS in ```document.write``` sink using source ```location.search```
 
-![image](https://gist.github.com/assets/91708209/e8d2f7af-f8aa-4a25-81cd-03e5185f8586)
+![image](https://github.com/user-attachments/assets/f8fc5df8-34bd-4241-9e91-7a9c0293033f)
 
 Ở lab này vẫn có search box ta thử inject code vào đây và challenge này có liên quan đến DOM nên ta sẽ xem qua code
 
